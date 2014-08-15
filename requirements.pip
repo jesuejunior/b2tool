@@ -1,0 +1,7 @@
+argparse==1.2.1
+-e git+git@github.com:jesuejunior/b2tool.git@ed96d43cba33ee2ed7d10c4d2bf565d2dda5dc0b#egg=b2tool-origin/develop
+ipython==2.2.0
+komandr==0.1.1
+python-modargs==1.7
+requests==2.3.0
+wsgiref==0.1.2
