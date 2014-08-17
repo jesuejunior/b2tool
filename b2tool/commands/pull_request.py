@@ -1,4 +1,5 @@
 #coding: utf-8
+import requests
 from b2tool.conf import BASE_URL_V2
 
 from b2tool import __projectname__
@@ -26,17 +27,32 @@ _pullrequest = komandr.prog(prog='{0} pull request'.format(__projectname__))
 # GETrepositories/{owner}/{repo_slug}/pullrequests/{id}/approvals
 
 @komandr.command
-@komandr.arg('cmd', 'cmd', choices=['list', 'accept', 'decline'], help="Available pull request subcommands. Use <subcommand> -h to see more.")
+@komandr.arg('cmd', 'cmd', choices=['list', 'accept', 'decline', 'older'], help="Available pull request subcommands. Use <subcommand> -h to see more.")
 def pullrequest(cmd):
     _pullrequest.execute(sys.argv[2:])
 
 
 @_pullrequest.command
 @_pullrequest.arg('owner', required=True, type=str, help='')
-@_pullrequest.arg('slug', required=True, type=str, help='')
-@_pullrequest.arg('id', required=False, type=int, help='')
-def list(owner=None, slug=None, id=None):
+@_pullrequest.arg('repo', required=True, type=str, help='')
+def list(owner=None, repo=None):
 
-    print "URL {0}".format(BASE_URL_V2)
+    path = "{0}repositories/{1}/{2}/pullrequests/".format(BASE_URL_V2, owner, repo)
+    res = requests.get(path, auth=('jesuejunior', '') )
+    print res.content
+
+@_pullrequest.command
+@_pullrequest.arg('owner', required=True, type=str, help='')
+@_pullrequest.arg('repo', required=True, type=str, help='')
+@_pullrequest.arg('id', required=True, type=int, help='')
+def accept(owner=None, repo=None, id=None):
+    path = "{0}repositories/{1}/{2}/pullrequests/{3}/accept".format(BASE_URL_V2, owner, repo, id)
+    res = requests.post(path, auth=('jesuejunior', '') )
+
+    if res.status == 200:
+        print "Pull request {0} accepetd successful".format(id)
+    else:
+        print "Ops, An error ocurred!"
+
 
 
