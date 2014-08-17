@@ -16,6 +16,7 @@ def auth(cmd):
 @_auth.arg('username', required=True, type=str, help='')
 @_auth.arg('password', required=True, type=str, help='')
 def login(username=None, password=None):
+
     path = BASE_URL_V1 + 'user/'
     res = requests.get(path, auth=(username, password))
     print 'Logging...'
