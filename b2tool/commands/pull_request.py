@@ -1,10 +1,17 @@
 #coding: utf-8
-import requests
-from b2tool.conf import BASE_URL_V2, get_credentials
-
-from b2tool import __projectname__
+try:
+    import simplejson as json
+except:
+    import json
 import sys
+
+import requests
+from clint.textui import puts, columns, colored
 import komandr
+
+from b2tool.conf import BASE_URL_V2, get_credentials
+from b2tool import __projectname__
+
 
 _pullrequest = komandr.prog(prog='{0} pull request'.format(__projectname__))
 
@@ -40,7 +47,12 @@ def list(owner=None, repo=None):
 
     path = "{0}repositories/{1}/{2}/pullrequests/".format(BASE_URL_V2, owner, repo)
     res = requests.get(path, auth=(USERNAME, PASSWORD))
-    print res.content
+    pulls =  json.loads(res.content).get('values')
+
+    # print pulls
+    puts(colored.magenta(columns(['Id', 5], ['Status', 8], [str('Repository'), 12], ['Source branch', 45], ['Created on', 35])))
+    for pull in pulls:
+        puts(colored.green(columns([str(pull['id']), 5], [pull['state'], 8], [str(pull['source']['repository']['name']), 12], [pull['source']['branch']['name'], 45], [pull['created_on'], 35])))
 
 @_pullrequest.command
 @_pullrequest.arg('owner', required=True, type=str, help='')
