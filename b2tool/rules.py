@@ -1,5 +1,12 @@
 
 class Pull(object):
+    """
+    
+    """
+
+    def __init__(self, *args, **kwargs):
+        self.args, self.kwargs = args, kwargs
+
     def oldest(object):
         #  ['source']['repository']['name']
         #  "state": "OPEN",
