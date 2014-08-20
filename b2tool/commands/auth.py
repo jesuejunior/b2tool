@@ -1,9 +1,12 @@
 import ConfigParser
-from pip._vendor import requests
-from b2tool import __projectname__
 import sys
+
 import komandr
+
+import requests
+from b2tool import __projectname__
 from b2tool.conf import CFGFILE, BASE_URL_V1
+
 
 _auth = komandr.prog(prog='{0} auth'.format(__projectname__))
 
