@@ -1,4 +1,6 @@
 #coding: utf-8
+from b2tool.rules import Pull
+
 try:
     import simplejson as json
 except:
@@ -47,12 +49,17 @@ def list(owner=None, repo=None):
 
     path = "{0}repositories/{1}/{2}/pullrequests/".format(BASE_URL_V2, owner, repo)
     res = requests.get(path, auth=(USERNAME, PASSWORD))
-    pulls =  json.loads(res.content).get('values')
 
-    # print pulls
-    puts(colored.magenta(columns(['Id', 5], ['Status', 8], [str('Repository'), 12], ['Source branch', 45], ['Created on', 35])))
-    for pull in pulls:
-        puts(colored.green(columns([str(pull['id']), 5], [pull['state'], 8], [str(pull['source']['repository']['name']), 12], [pull['source']['branch']['name'], 45], [pull['created_on'], 35])))
+    if res.content:
+        pulls = json.loads(res.content).get('values')
+
+        # print pulls
+        puts(colored.magenta(columns(['Id', 5], ['Status', 8], [str('Repository'), 12], ['Source branch', 45], ['Created on', 35])))
+        for pull in pulls:
+            puts(colored.green(columns([str(pull['id']), 5], [pull['state'], 8], [str(pull['source']['repository']['name']), 12],
+                                       [pull['source']['branch']['name'], 45], [pull['created_on'], 35])))
+    else:
+        puts(colored.red('Sorry, there is no pull request for this repository.'))
 
 @_pullrequest.command
 @_pullrequest.arg('owner', required=True, type=str, help='')
@@ -60,12 +67,11 @@ def list(owner=None, repo=None):
 @_pullrequest.arg('id', required=True, type=int, help='')
 def accept(owner=None, repo=None, id=None):
     path = "{0}repositories/{1}/{2}/pullrequests/{3}/accept".format(BASE_URL_V2, owner, repo, id)
-    res = requests.post(path, auth=(USERNAME, PASSWORD) )
-
+    res = requests.post(path, auth=(USERNAME, PASSWORD))
     if res.status == 200:
-        print "Pull request {0} accepetd successful".format(id)
+        puts(colored.green("Pull request {0} accepeted successful".format(id)))
     else:
-        print "Ops, An error ocurred!"
+        puts(colored.red("Ops, An error ocurred!"))
 
 @_pullrequest.command
 @_pullrequest.arg('owner', required=True, type=str, help='')
@@ -77,5 +83,26 @@ def decline(owner=None, repo=None, id=None):
 @_pullrequest.command
 @_pullrequest.arg('owner', required=True, type=str, help='')
 @_pullrequest.arg('repo', required=True, type=str, help='')
-def oldest(owner=None, repo=None):
-    pass
+@_pullrequest.arg('id', required=False, type=bool, help='Return ID of oldest pull request')
+@_pullrequest.arg('branch', required=False, type=bool, help='Return branch name oldest pull request')
+def oldest(owner=None, repo=None, id=False, branch=False):
+    old_pull_request = None
+    path = "{0}repositories/{1}/{2}/pullrequests/".format(BASE_URL_V2, owner, repo)
+    res = requests.get(path, auth=(USERNAME, PASSWORD))
+
+    if res.content:
+        pulls = json.loads(res.content).get('values')
+        old_pull_request = Pull.oldest(pulls)
+
+    if id:
+        result =  old_pull_request.get('id')
+        puts(str(result))
+        return result
+    if branch:
+        result =  old_pull_request.get('branch')
+        puts(str(result))
+        return result
+    else:
+        puts(colored.magenta(columns(['Id', 5], ['Branch', 8])))
+        puts(colored.green(columns([str(old_pull_request['id']), 5], [old_pull_request['branch'], 8])))
+        return {}
