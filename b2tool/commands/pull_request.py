@@ -84,7 +84,7 @@ def decline(owner=None, repo=None, id=None):
 @_pullrequest.arg('owner', required=True, type=str, help='')
 @_pullrequest.arg('repo', required=True, type=str, help='')
 @_pullrequest.arg('id', required=False, type=bool, help='Return ID of oldest pull request')
-@_pullrequest.arg('branch', required=False, type=bool, help='Return branch name oldest pull request')
+@_pullrequest.arg('branch', required=False, type=bool, help='Return source branch name oldest pull request')
 def oldest(owner=None, repo=None, id=False, branch=False):
     old_pull_request = None
     path = "{0}repositories/{1}/{2}/pullrequests/".format(BASE_URL_V2, owner, repo)

@@ -44,7 +44,7 @@ def parse_date(dt):
     # 4 = minutes
     # 5 = seconds
 
-    result = map(lambda x: int(x), re.findall( '\d{1,4}\d{1,2}', dt))
+    result = map(lambda x: int(x), re.findall('\d{1,4}\d{1,2}', dt))
     for i in range(0,3):
         result.pop()
 
