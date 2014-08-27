@@ -37,7 +37,8 @@ USERNAME, PASSWORD = get_credentials()
 # GETrepositories/{owner}/{repo_slug}/pullrequests/{id}/approvals
 
 @komandr.command
-@komandr.arg('cmd', 'cmd', choices=['list', 'accept', 'decline', 'oldest'], help="Available pull request subcommands. Use <subcommand> -h to see more.")
+@komandr.arg('cmd', 'cmd', choices=['list', 'accept', 'decline', 'oldest'], help="Available pull request subcommands."
+                                                                                 " Use <subcommand> -h to see more.")
 def pullrequest(cmd):
     _pullrequest.execute(sys.argv[2:])
 
@@ -54,10 +55,10 @@ def list(owner=None, repo=None):
         pulls = json.loads(res.content).get('values')
 
         # print pulls
-        puts(colored.magenta(columns(['Id', 5], ['Status', 8], [str('Repository'), 12], ['Source branch', 45], ['Created on', 35])))
+        puts(colored.magenta(columns(['Id', 5], ['Status', 8], [str('Repository'), 12], ['Source branch', 45], ['Destination branch', 35], ['Created on', 35])))
         for pull in pulls:
             puts(colored.green(columns([str(pull['id']), 5], [pull['state'], 8], [str(pull['source']['repository']['name']), 12],
-                                       [pull['source']['branch']['name'], 45], [pull['created_on'], 35])))
+                                       [pull['source']['branch']['name'], 45], [pull['destination']['branch']['name'], 35], [pull['created_on'], 35])))
     else:
         puts(colored.red('Sorry, there is no pull request for this repository.'))
 
@@ -66,7 +67,7 @@ def list(owner=None, repo=None):
 @_pullrequest.arg('repo', required=True, type=str, help='')
 @_pullrequest.arg('id', required=True, type=int, help='')
 def accept(owner=None, repo=None, id=None):
-    path = "{0}repositories/{1}/{2}/pullrequests/{3}/accept".format(BASE_URL_V2, owner, repo, id)
+    path = "{0}repositories/{1}/{2}/pullrequests/{3}/merge".format(BASE_URL_V2, owner, repo, id)
     res = requests.post(path, auth=(USERNAME, PASSWORD))
     if res.status == 200:
         puts(colored.green("Pull request {0} accepeted successful".format(id)))

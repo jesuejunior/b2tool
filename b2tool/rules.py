@@ -9,6 +9,7 @@ class Pull(object):
 
     def __init__(self, *args, **kwargs):
         self.args, self.kwargs = args, kwargs
+
     @staticmethod
     def oldest(objects):
         #  ['source']['repository']['name']
