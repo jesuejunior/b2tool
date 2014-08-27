@@ -1,7 +1,7 @@
 import unittest
 
 from b2tool.commands.auth import login
-import mock 
+import mock
 
 
 class LoginTest(unittest.TestCase):
@@ -26,3 +26,6 @@ class LoginTest(unittest.TestCase):
             res = login('abc123', '123abc')
 
         self.assertEquals(res,  False)
+
+    def test_write_file_login(self):
+        self.fail()
