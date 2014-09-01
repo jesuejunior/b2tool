@@ -1,5 +1,7 @@
 import unittest
 import mock
+from b2tool.commands import listall
+
 
 class PullRequestTest(unittest.TestCase):
 
@@ -12,9 +14,9 @@ class PullRequestTest(unittest.TestCase):
         self.response.status_code = 200
 
         with mock.patch("requests.get", return_value=self.response):
-            res = list()
+            res = listall('test123', '123test')
 
-        self.assertEquals(res,  True)
+        self.assertEquals(res,  1)
 
 
     def test_get_aldest_pull_request(self):
