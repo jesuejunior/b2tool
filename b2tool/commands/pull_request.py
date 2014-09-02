@@ -72,7 +72,7 @@ def accept(owner=None, repo=None, id=None, message=None):
     data = {'message': message}
     path = "{0}repositories/{1}/{2}/pullrequests/{3}/merge".format(BASE_URL_V2, owner, repo, id)
     res = requests.post(path, auth=(USERNAME, PASSWORD), data=data)
-    if res.status == 200:
+    if res.status_code == 200:
         puts(colored.green("Pull request {0} accepeted successful".format(id)))
         return 1
     else:

@@ -1,6 +1,6 @@
 import unittest
 import datetime
-from b2tool.rules import oldest, parse_date
+from b2tool.rules import parse_date, Pull
 
 
 class RuleOldestTest(unittest.TestCase):
@@ -36,19 +36,19 @@ class RuleOldestTest(unittest.TestCase):
     def test_get_more_old_correct(self):
 
         expected = {'branch': 'develop', 'id': 85}
-        result = oldest(self.obj)
+        result = Pull.oldest(self.obj)
 
         self.assertEquals(expected, result)
 
     def test_get_when_have_one(self):
         expected = {'branch': 'develop', 'id': 85}
-        result = oldest(self.obj)
+        result = Pull.oldest(self.obj)
 
         self.assertEquals(expected, result)
 
     def test_get_when_empty(self):
         expected = {}
-        result = oldest({})
+        result = Pull.oldest({})
 
         self.assertEquals(expected, result)
 
