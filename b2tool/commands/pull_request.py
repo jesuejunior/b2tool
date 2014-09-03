@@ -110,6 +110,6 @@ def oldest(owner=None, repo=None, id=False, branch=False):
         puts(str(result))
         return 1
     else:
-        puts(colored.magenta(columns(['Id', 5], ['Branch', 8])))
-        puts(colored.green(columns([str(old_pull_request['id']), 5], [old_pull_request['branch'], 8])))
+        puts(colored.magenta(columns(['Id', 5], ['Branch', 55])))
+        puts(colored.green(columns([str(old_pull_request['id']), 5], [old_pull_request['branch'], 55])))
         return 0
