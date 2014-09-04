@@ -89,8 +89,8 @@ def decline(owner=None, repo=None, id=None):
 
 
 @_pullrequest.command
-@_pullrequest.arg('owner', required=True, type=str, help='')
-@_pullrequest.arg('repo', required=True, type=str, help='')
+@_pullrequest.arg('owner', required=True, type=str, help='Owner of repository you want to list')
+@_pullrequest.arg('repo', required=True, type=str, help='Repository where you have pulls')
 @_pullrequest.arg('id', required=False, type=bool, help='Return ID of oldest pull request')
 @_pullrequest.arg('branch', required=False, type=bool, help='Return source branch name oldest pull request')
 def oldest(owner=None, repo=None, id=False, branch=False):
