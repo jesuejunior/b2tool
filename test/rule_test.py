@@ -53,7 +53,6 @@ class RuleOldestTest(unittest.TestCase):
         self.assertEquals(expected, result)
 
 
-
 class RuleHelperTest(unittest.TestCase):
 
     def test_parse_date_ok(self):
