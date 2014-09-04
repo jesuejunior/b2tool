@@ -29,6 +29,8 @@ ______________________________
   * accept
 
     --id Integer
+    
+    --message String
 
 
 
@@ -72,4 +74,4 @@ $ b2tool pullrequest oldest --owner jesuejunior --repo projectA  --branch True
 **Accept pull request with id 100**
 ::
 
-$ b2tool pullrequest accept --owner jesuejunior --repo projectA  --id 100
+$ b2tool pullrequest accept --owner jesuejunior --repo projectA  --id 100 --message 'Accept this pull request ok'
