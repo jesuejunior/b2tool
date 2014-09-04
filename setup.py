@@ -7,6 +7,9 @@ from b2tool import __projectname__
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
+with open(os.path.join(ROOT, 'README.rst')) as readme_file:
+    long_description = readme_file.read()
+
 setup(
   name=__projectname__,
   version='0.0.2',
@@ -15,7 +18,7 @@ setup(
   description='bbtool is a command line tool to manage BitBucket',
   author="Jesue Junior",
   author_email="talkto@jesuejunior.com",
-  long_description=open(os.path.join(ROOT, 'README.rst')).read(),
+  long_description=long_description,
   packages=['b2tool'],
     entry_points={
         'console_scripts': [
