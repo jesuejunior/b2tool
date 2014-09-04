@@ -15,7 +15,7 @@ setup(
   description='bbtool is a command line tool to manage BitBucket',
   author="Jesue Junior",
   author_email="talkto@jesuejunior.com",
-  long_description=open(os.path.join(ROOT, 'README.md')).read(),
+  long_description=open(os.path.join(ROOT, 'README.rst')).read(),
   packages=['b2tool'],
     entry_points={
         'console_scripts': [
