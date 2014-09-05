@@ -1,8 +1,8 @@
-argparse==1.2.1
 komandr==0.1.1
+clint==0.3.7
+requests==2.3.0
+
+#To tests
 mock==1.0.1
 pytest==2.6.1
-python-modargs==1.7
-requests==2.3.0
 responses==0.2.2
-clint==0.3.7
