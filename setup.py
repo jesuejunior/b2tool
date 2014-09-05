@@ -9,7 +9,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 
 setup(
   name=__projectname__,
-  version='0.0.2',
+  version='0.0.3',
   url="https://github.com/jesuejunior/b2tool",
   license="3-BSD",
   description='bbtool is a command line tool to manage BitBucket',
@@ -22,7 +22,7 @@ setup(
             'b2tool = b2tool.main:main',
             ]
     },
-  install_requires = ['komandr==0.1.1', 'requests==2.3.0'],
+  install_requires = ['komandr==0.1.1', 'requests==2.3.0', 'clint==0.3.7'],
   classifiers = [
     "License :: OSI Approved :: BSD License",
     "Operating System :: OS Independent",

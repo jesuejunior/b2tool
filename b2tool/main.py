@@ -1,6 +1,4 @@
-from modargs import args
 import sys
-import os
 import b2tool.commands
 import komandr
 
