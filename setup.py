@@ -9,7 +9,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 
 setup(
   name=__projectname__,
-  version='0.0.3',
+  version='0.0.4',
   url="https://github.com/jesuejunior/b2tool",
   license="3-BSD",
   description='bbtool is a command line tool to manage BitBucket',
