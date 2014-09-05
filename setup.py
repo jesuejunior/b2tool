@@ -16,7 +16,7 @@ setup(
   author="Jesue Junior",
   author_email="talkto@jesuejunior.com",
   long_description=open(os.path.join(ROOT, 'README.rst')).read(),
-  packages=['b2tool'],
+  packages=['b2tool', 'b2tool/commands'],
     entry_points={
         'console_scripts': [
             'b2tool = b2tool.main:main',
