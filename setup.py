@@ -25,7 +25,7 @@ setup(
             'b2tool = b2tool.main:main',
             ]
     },
-  install_requires = ['komandr==0.1.1', 'requests==2.20.0', 'clint==0.3.7'],
+  install_requires = ['komandr==0.1.1', 'requests==2.31.0', 'clint==0.3.7'],
   classifiers = [
     "License :: OSI Approved :: BSD License",
     "Operating System :: OS Independent",
